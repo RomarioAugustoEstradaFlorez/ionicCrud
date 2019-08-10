@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title class="animated bounceIn">Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="form-content">
+  <form [formGroup]="validations_form"  (ngSubmit)="onSubmit(validations_form.value)" *ngIf="!registerSuccess">
+    
+    <ion-item>
+      <ion-label position="floating" color="primary">N° de identificación:</ion-label>
+      <ion-input type="number" formControlName="identification" max="10"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.identification">
+        <div class="error-message animated shake" *ngIf="validations_form.get('identification').hasError(validation.type) && (validations_form.get('identification').dirty || validations_form.get('identification').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Nombres:</ion-label>
+      <ion-input type="text" formControlName="firstname"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.firstname">
+        <div class="error-message animated shake" *ngIf="validations_form.get('firstname').hasError(validation.type) && (validations_form.get('firstname').dirty || validations_form.get('firstname').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Apellidos:</ion-label>
+      <ion-input type="text" formControlName="lastname"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.lastname">
+        <div class="error-message animated shake" *ngIf="validations_form.get('lastname').hasError(validation.type) && (validations_form.get('lastname').dirty || validations_form.get('lastname').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label color="primary">Fecha de nacimiento</ion-label>
+                    <ion-datetime displayFormat="DD/MM/YYYY" 
+                     [(ngModel)]="birthdate"  
+                    (ionChange)="setDate()" 
+                    [min]="minDate" formControlName="birthdate"></ion-datetime>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.birthdate">
+        <div class="error-message animated shake" *ngIf="validations_form.get('birthdate').hasError(validation.type) && (validations_form.get('birthdate').dirty || validations_form.get('birthdate').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+      <div class="error-message animated shake" *ngIf="validDate == false && dateSelected == true">
+        <ion-icon name="information-circle-outline"></ion-icon> Debe ser mayor de 18 años para poder registrarse
+      </div>
+    </div>
+    <ion-button color="secondary animated" class="submit-btn" [ngClass]="{'pulse': (validations_form.valid && validDate)}" expand="full" type="submit" [disabled]="!validations_form.valid && !validDate">Registrarse</ion-button>
+  </form>
+
+  <ion-card color="primary" class="animated" [ngClass]="{'boounceIn':registerSuccess}" *ngIf="registerSuccess">
+    <ion-card-header>
+      <ion-card-title>Registro exitoso</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Se ha registrado satisfactoriamente.
+    </ion-card-content>
+  </ion-card>
+  <ion-button color="secondary" expand="full" *ngIf="registerSuccess" (click)="resetForm()">Volver al registro</ion-button>
+
+
+</ion-content>
