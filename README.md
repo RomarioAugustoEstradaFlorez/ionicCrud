@@ -1,10 +1,10 @@
-# Ionic 4 Forms
+# Formulario en Ionic 4
 
 Este repositorio hace conexión a firebase con un formulario básico de fecha, identifacion, nombre y apellidos, se puede guardar y consultarla ifnormación.
 
-**Please support this project by simply putting a Github star ⭐**
+** Dame una esrella si te sirvió ⭐**
 
 
-## Run this ionic project
-Run `npm install` to install the project dependencies
-Run `ionic serve` to start a dev server
+## Correr este proyecto de ionic
+Correr `npm install` para instalar las dependencias del proyecto
+Correr `ionic serve` para iniciar el servidor de desarrollo.
